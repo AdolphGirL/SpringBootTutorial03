@@ -1,0 +1,34 @@
+server:
+  port: 9090
+  servlet:
+    context-path: /jdbc
+
+spring:
+  profiles:
+    active:
+    - dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/tutorial?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 1234
+
+---
+
+spring:
+  profiles:
+  - init
+  datasource:
+    initialization-mode: always
+    schema:
+    - classpath:user.sql
+    - classpath:department.sql
+    data:
+    - classpath:user-init-data.sql
+    - classpath:department-init-data.sql
+    
+---
+
+spring:
+  profiles:
+  - dev
